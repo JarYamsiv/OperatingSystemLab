@@ -1,0 +1,62 @@
+//function name and current pid are stored in registers R1 and R2
+alias functionNum R1;
+alias currentPID R2;
+alias word R3;
+
+//terminal write function have the function number 3 so checking and proceeding
+if (functionNum == 3) then
+    
+    //print ("module 0");
+    multipush (R1 , R2, R3);
+    R1 = 8;                         //for the acquire terminal
+    R2 = [SYSTEM_STATUS_TABLE + 1];
+
+    call MOD_0;
+
+    multipop (R1, R2 , R3);
+    print word;
+    multipush (R1 , R2, R3);
+    R1 = 9;                         //for the release terminal
+    R2 = [SYSTEM_STATUS_TABLE + 1];
+    call MOD_0;
+    R4 = R0;                //saving the return value;
+
+    multipop (R1, R2 , R3);
+    //print ("module 0 rele");
+    return;
+endif;
+
+//this is for the terminal read 
+if (functionNum == 4) then
+
+    multipush (R0 , R1 , R2, R3);
+    R1 = 8;
+    R2 = [SYSTEM_STATUS_TABLE + 1];
+
+    call MOD_0;                    //this is the resource manager module
+    multipop (R0, R1 , R2 , R3);
+
+    read;
+    [PROCESS_TABLE + 16 * [SYSTEM_STATUS_TABLE + 1] + 4] = WAIT_TERMINAL;
+
+    //this is to call the context switch module
+    //this is to call the scheduler
+
+    multipush (R0 , R1, R2 , R3);
+    call MOD_5;
+    multipop (R0 , R1 , R2 , R3);
+    alias physicalAddressRetVal R4;
+    physicalAddressRetVal =([PTBR + 2 * (R3/ 512) ] * 512 )  + (R3 % 512);
+    
+    //storing the value in the input buffer
+    [physicalAddressRetVal] = [PROCESS_TABLE + (16 * currentPID) + 8]; 
+    return;
+
+
+else 
+return;
+
+endif;
+
+return;
+

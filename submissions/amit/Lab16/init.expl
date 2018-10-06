@@ -1,0 +1,17 @@
+int main(){
+	decl 
+		int a, b, temp, res;
+		str s;
+	enddecl
+	begin
+		s = "gcd";
+		temp = exposcall( "Write", -2, s);
+		read(a);
+		temp = exposcall( "Write", -2, "gcd1");
+		read(b);
+		res = (a + b);
+		temp = exposcall( "Write", -2, "gcd2");
+		temp = exposcall( "Write", -2, res);
+		return 0;
+	end
+}

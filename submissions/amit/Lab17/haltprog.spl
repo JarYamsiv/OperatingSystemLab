@@ -1,0 +1,23 @@
+alias currentPID R0;
+currentPID = [SYSTEM_STATUS_TABLE + 1];
+
+[PROCESS_TABLE + currentPID * 16 + 4] = TERMINATED;
+
+alias halt_or_not R1;
+halt_or_not = 0;
+
+alias process_number R2;
+process_number = 1;
+while (process_number < 16) do
+    if ([PROCESS_TABLE + 16 * process_number + 4] != TERMINATED) then
+        halt_or_not = 1;
+        break;
+    endif;
+    process_number = process_number + 1;
+endwhile;
+
+if (halt_or_not == 1) then
+call MOD_5;
+endif;
+
+halt;

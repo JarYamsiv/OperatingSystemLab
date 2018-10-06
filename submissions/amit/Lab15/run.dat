@@ -1,0 +1,13 @@
+load --int=10 ../spl/progs/Lab15/int10.xsm
+load --os ../spl/progs/Lab15/osStartup1.xsm
+load --module 5 ../spl/progs/Lab15/module5.xsm
+load --module 4 ../spl/progs/Lab15/module4.xsm
+load --module 0 ../spl/progs/Lab15/module0.xsm
+load --module 7 ../spl/progs/Lab15/module7.xsm
+load --library ../expl/library.lib
+load --init ../expl/progs/Lab15/odd.xsm
+load --idle ../expl/progs/Lab15/idle1.xsm
+load --exec ../expl/progs/Lab15/even.xsm
+load --exec ../expl/progs/Lab15/prime.xsm
+load --int=timer ../spl/progs/Lab15/timer1.xsm
+load --int=7 ../spl/progs/Lab15/writeInterrupt.xsm

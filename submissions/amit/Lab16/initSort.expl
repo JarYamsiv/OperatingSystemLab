@@ -1,0 +1,12 @@
+int main(){
+	decl 
+		int n, temp, res, i, j;
+		int a[100];
+		str s;
+	enddecl
+	begin
+		temp = exposcall( "Write", -2, "enter");
+		read(n);
+		return 0;
+	end
+}

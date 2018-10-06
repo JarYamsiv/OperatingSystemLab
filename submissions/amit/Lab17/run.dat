@@ -1,0 +1,16 @@
+load --idle ../expl/progs/Lab17/idle.xsm
+load --init ../expl/progs/Lab17/init.xsm
+load --int=10 ../spl/progs/Lab17/haltprog.xsm
+load --os ../spl/progs/Lab17/osStartup.xsm
+load --module 7 ../spl/progs/Lab17/boot.xsm
+load --int=console ../spl/progs/Lab17/console_interrupt.xsm
+load --int=6 ../spl/progs/Lab17/int6.xsm
+load --int=7 ../spl/progs/Lab17/int7.xsm
+load --module 0 ../spl/progs/Lab17/mod0.xsm
+load --module 4 ../spl/progs/Lab17/mod4.xsm
+load --module 5 ../spl/progs/Lab17/scheduler.xsm
+load --module 1 ../spl/progs/Lab17/mod1_process.xsm
+load --module 2 ../spl/progs/Lab17/mod2_memory.xsm
+load --exec ../expl/progs/Lab17/odd.xsm
+load --exec ../expl/progs/Lab17/even.xsm
+load --int=9 ../spl/progs/Lab17/interrupt9_exec.xsm

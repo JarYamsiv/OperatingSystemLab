@@ -1,0 +1,11 @@
+int main(){
+	decl 
+		int a, temp;
+		str s;
+	enddecl
+	begin
+		temp = exposcall( "Write", -2, "explPrint1");
+		temp = exposcall( "Write", -2, "explPrint2");
+		return 0;
+	end
+}

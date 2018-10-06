@@ -1,0 +1,68 @@
+alias functionNum R1;
+alias currentPID R2;
+
+//free user area page
+if (functionNum == 2) then
+    R3 = [PROCESS_TABLE + currentPID * 16 + 11];
+    
+    //for the memory manager module
+    multipush (R0 , R1 , R2 , R3);
+    R1 = 2;                   //for releasing the page
+    R2 = R3;                  //this is the page number
+    call MOD_2;
+    multipop (R0 , R1 , R2 , R3);
+
+    return;
+endif;
+
+//this is for the exit process 
+if (functionNum == 3) then
+
+    R4 = currentPID;                //this is to store the currentPID
+    multipush (R0 , R1 , R2 , R3);
+    R1 = 4;                   //free page table
+    R2 = R4;                  //currentPID of the process
+    call MOD_1;
+    multipop (R0 , R1 , R2 , R3);
+
+    multipush (R0 , R1 , R2 , R3);
+    R1 = 2;                   //free user area page
+    R2 = R4;
+    call MOD_1;
+    multipop (R0 , R1 , R2 , R3);
+
+    [PROCESS_TABLE + R4 * 16 + 4] = TERMINATED;
+    return;
+endif;
+
+//this is for the page table
+if (functionNum == 4) then
+    alias page_table_base R6;
+    page_table_base = [PROCESS_TABLE + currentPID * 16 + 14];
+
+    //this is for the page table base
+    [page_table_base + 0] = -1;
+    [page_table_base + 1] = "0000";
+    [page_table_base + 2] = -1;
+    [page_table_base + 3] = "0000";
+
+    R5 = 2;                  //this is the page number
+    while (R5 < 10) do
+        //print ("mod 1");
+        if ([page_table_base + 2 * R5] != -1) then
+            multipush (R0 , R1 , R2 , R3 , R4 , R5 , R6);
+            R1 = 2;                   //release page
+            R2 = [page_table_base + 2 * R5];                  //page number
+            call MOD_2;
+            multipop (R0 , R1 , R2 , R3 , R4,R5 , R6);
+            [page_table_base + 2 * R5 + 1] = "0000";         //invalidate the entry
+            [page_table_base + 2 * R5] = -1;
+        endif;
+
+    R5 = R5 + 1;
+    endwhile;
+
+    return;
+else 
+ return;
+endif;

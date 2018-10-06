@@ -1,0 +1,28 @@
+decl
+    int temp,num;
+    str filename;
+enddecl
+
+int main()
+{
+begin
+
+    num=1;
+    write ("Enter even");
+    while ( num <= 100 ) do
+    	 if ((num % 2) != 1) then
+	         temp = exposcall ( "Write" , -2, num );
+         endif;
+         num = num + 1;
+    endwhile;
+
+    write ("EnterFilename");
+    read(filename);
+    temp = exposcall ( "Exec" ,filename);
+    if(temp==-1)then
+        temp = exposcall("Write",-2,"no such pgm");
+    endif;
+
+    return 0;
+end
+}

@@ -1,0 +1,23 @@
+//Save the current value of User Sp into process table
+[PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1]*16) + 13] = SP;
+
+//Set SP to beginning of kernel stack of current Process
+SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1]*16) + 11]*512 - 1;
+
+//backup
+backup;
+
+//alias currentPID R0;
+//currentPID = [SYSTEM_STATUS_TABLE+1];
+[PROCESS_TABLE + ([SYSTEM_STATUS_TABLE+1]*16) + 4] = READY;
+
+//iNVOKE sCHEDULER
+call MOD_5;
+
+restore;
+
+//set SP to userSP of new process
+SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1]*16) +13];
+
+ireturn;
+

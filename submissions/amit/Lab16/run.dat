@@ -1,0 +1,13 @@
+load --int=10 ../spl/progs/Lab16/int10.xsm
+load --os ../spl/progs/Lab15/osStartup1.xsm
+load --module 5 ../spl/progs/Lab16/module5.xsm
+load --module 4 ../spl/progs/Lab16/module4.xsm
+load --module 0 ../spl/progs/Lab16/module0.xsm
+load --module 7 ../spl/progs/Lab16/module7.xsm
+load --int=console ../spl/progs/Lab16/consoleInt.xsm
+load --library ../expl/library.lib
+load --init ../expl/progs/Lab16/initGcd.xsm
+load --idle ../expl/progs/Lab16/idle1.xsm
+load --int=timer ../spl/progs/Lab16/timer1.xsm
+load --int=6 ../spl/progs/Lab16/int6.xsm
+load --int=7 ../spl/progs/Lab16/writeInterrupt.xsm
